@@ -1,13 +1,14 @@
 import { Body, Controller, Get, Post, Put } from '@nestjs/common';
-import { RelicCreateDto } from './dto/relic-create.dto';
+import { CreateRelicDto } from './dto/create-relic.dto';
 import { RelicsService } from './relics.service';
+import { UpdateRelicDto } from './dto/update-relic.dto';
 
 @Controller('relics')
 export class RelicsController {
     constructor(private relicsService: RelicsService) { };
 
     @Post('create')
-    async create(@Body() relicDto: RelicCreateDto) {
+    async create(@Body() relicDto: CreateRelicDto) {
         return this.relicsService.create(relicDto);
     }
 
@@ -17,5 +18,7 @@ export class RelicsController {
     }
 
     @Put('update')
-    async updateRelic() { }
+    async updateRelic(@Body() updateRelicDto: UpdateRelicDto) {
+        return this.relicsService.update(updateRelicDto)
+    }
 }

@@ -1,5 +1,8 @@
 version: '3.9'
 
+volumes:
+  pg_data: 
+  
 services:
   postgres:
     container_name: database
