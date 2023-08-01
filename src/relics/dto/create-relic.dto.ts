@@ -8,6 +8,10 @@ export class CreateRelicDto {
 
     public readonly name: string;
 
+    @IsString()
+    @IsNotEmpty()
+    url_name: string;
+
     @IsEnum(RelicType, { message: "Relic type must be one of next types: lith, meso, neo, axi, requiem" })
     @IsNotEmpty({ message: 'This field is required' })
 

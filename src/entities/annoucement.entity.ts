@@ -1,20 +1,17 @@
 
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { RelicEntity } from "../relics/entities/relic.entity";
-import { SquadEntity } from "./squad.entity";
+import { RelicEntity } from "#src/relics/entities/relic.entity";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+
 
 @Entity({ name: "annoucements" })
 export class AnnoucementEntity {
     @PrimaryGeneratedColumn("increment", { name: "annoucement_id" })
-    public readonly id: number
+    id: number
 
     @Column({ name: "hoster_uuid" })
-    public readonly hoster: string
-    // @ManyToOne(() => Relic, relic => relic.annoucements)
+    hoster: string
 
-    // public readonly relic: Relic;
-
-    //     @OneToMany(() => Squad, squad => squad.annoucement)
-
-    //     public readonly squad: Squad[]
+    @ManyToOne(type => RelicEntity, relic => relic.annoucements)
+    @JoinColumn({ name: 'relic_id' })
+    relic: RelicEntity
 }

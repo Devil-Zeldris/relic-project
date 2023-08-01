@@ -16,6 +16,7 @@ export class RelicEntity {
     @Column({ type: "enum", enum: RelicRefinementType, name: "refinement", nullable: false })
     public readonly refinement: RelicRefinementType
 
-    @OneToMany(type => AnnoucementEntity, annoucement => annoucement.id, { cascade: true })
+    @OneToMany(type => AnnoucementEntity, annoucement => annoucement.id, { onDelete: "CASCADE", onUpdate: "CASCADE" })
+    @JoinColumn({ name: "annoucement_id" })
     annoucements: AnnoucementEntity[]
 }

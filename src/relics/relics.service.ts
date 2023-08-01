@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RelicEntity } from './entities/relic.entity';
-import { Equal, Repository } from 'typeorm';
+import { Equal, Repository, UpdateResult } from 'typeorm';
 import { CreateRelicDto } from './dto/create-relic.dto';
 import { UpdateRelicDto } from '#src/relics/dto/update-relic.dto'
 
@@ -19,8 +19,9 @@ export class RelicsService {
         return relics;
     }
 
-    async update(dto: UpdateRelicDto): Promise<RelicEntity> {
-        const relic = await this.relicRepository.save(dto)
+    async update(dto: UpdateRelicDto) {
+        const relic = await this.relicRepository.findOneByOrFail({ name: dto.name } || { id: dto.id })
+
         return relic
     }
 }

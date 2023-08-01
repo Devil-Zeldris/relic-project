@@ -7,7 +7,7 @@ import { UpdateRelicDto } from './dto/update-relic.dto';
 export class RelicsController {
     constructor(private relicsService: RelicsService) { };
 
-    @Post('create')
+    @Post()
     async create(@Body() relicDto: CreateRelicDto) {
         return this.relicsService.create(relicDto);
     }
