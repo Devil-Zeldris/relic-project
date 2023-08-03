@@ -1,24 +1,4 @@
-import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
-import { RelicRefinementType, RelicType } from "../types/relic.types";
+import { PartialType } from "@nestjs/mapped-types";
+import { CreateRelicDto } from "./create-relic.dto";
 
-export class UpdateRelicDto {
-    @IsString()
-    @IsNotEmpty()
-    @IsOptional()
-    name?: string
-
-    @IsNumber()
-    @IsNotEmpty()
-    @IsOptional()
-    id?: number
-
-    @IsEnum(RelicType)
-    @IsNotEmpty()
-    @IsOptional()
-    type?: RelicType
-
-    @IsEnum(RelicRefinementType)
-    @IsNotEmpty()
-    @IsOptional()
-    refinement?: RelicRefinementType
-}
+export class UpdateRelicDto extends PartialType(CreateRelicDto) { }

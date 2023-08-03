@@ -1,4 +1,4 @@
-import { AnnoucementEntity } from "#src/entities/annoucement.entity";
+import { AnnoucementEntity } from "#src/annoucements/entities/annoucement.entity";
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 

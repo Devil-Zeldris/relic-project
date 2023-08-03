@@ -1,24 +1,30 @@
-import { IsString, MaxLength, IsNotEmpty, IsEnum } from "class-validator";
+import { IsString, MaxLength, IsNotEmpty, IsEnum, IsBoolean } from "class-validator";
 import { RelicRefinementType, RelicType } from "../types/relic.types";
+import { RelicEntity } from "../entities/relic.entity";
+import { PartialType } from "@nestjs/mapped-types";
 
-export class CreateRelicDto {
-    @IsString({ message: 'The relic must be a string' })
-    @MaxLength(14, { message: 'The relic name must have less than 14 characters' })
-    @IsNotEmpty({ message: 'This field is required' })
+export class CreateRelicDto extends RelicEntity {
 
-    public readonly name: string;
-
-    @IsString()
-    @IsNotEmpty()
-    url_name: string;
-
-    @IsEnum(RelicType, { message: "Relic type must be one of next types: lith, meso, neo, axi, requiem" })
-    @IsNotEmpty({ message: 'This field is required' })
-
-    public readonly type: RelicType
-
-    @IsEnum(RelicRefinementType, { message: "Relic Refinement type must be one of next types: intact, exceptional, flawless, radiant" })
-    @IsNotEmpty({ message: 'This field is required' })
-
-    public readonly refinement: RelicRefinementType
 }
+// export class CreateRelicDto {
+//     @IsString()
+//     @MaxLength(14)
+//     @IsNotEmpty()
+//     name: string;
+
+//     @IsString()
+//     @IsNotEmpty()
+//     url_name: string;
+
+//     @IsEnum(RelicType)
+//     @IsNotEmpty()
+//     type: RelicType;
+
+//     @IsEnum(RelicRefinementType)
+//     @IsNotEmpty()
+//     refinement: RelicRefinementType;
+
+//     @IsBoolean()
+//     @IsNotEmpty()
+//     vaulted: boolean;
+// }

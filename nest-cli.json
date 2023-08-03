@@ -3,6 +3,18 @@
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "compilerOptions": {
-    "deleteOutDir": true
+    "deleteOutDir": true,
+    "webpack": true
+  },
+  "projects": {
+    "relic-project-lib": {
+      "type": "library",
+      "root": "libs/relic-project-lib",
+      "entryFile": "index",
+      "sourceRoot": "libs/relic-project-lib/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/relic-project-lib/tsconfig.lib.json"
+      }
+    }
   }
 }

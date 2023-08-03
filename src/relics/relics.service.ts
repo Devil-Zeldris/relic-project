@@ -1,27 +1,33 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RelicEntity } from './entities/relic.entity';
-import { Equal, Repository, UpdateResult } from 'typeorm';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { CreateRelicDto } from './dto/create-relic.dto';
-import { UpdateRelicDto } from '#src/relics/dto/update-relic.dto'
+import { UpdateRelicDto } from './dto/update-relic.dto'
+import { DeleteRelicDto } from './dto/delete-relic.dto';
 
 @Injectable()
 export class RelicsService {
     constructor(@InjectRepository(RelicEntity) private relicRepository: Repository<RelicEntity>) { }
 
     async create(dto: CreateRelicDto): Promise<RelicEntity> {
-        const relic = await this.relicRepository.save(dto)
+        const relic: RelicEntity = await this.relicRepository.save(dto)
         return relic;
     }
 
     async getAll(): Promise<RelicEntity[]> {
-        const relics = await this.relicRepository.find()
+        const relics: RelicEntity[] = await this.relicRepository.find()
         return relics;
     }
 
-    async update(dto: UpdateRelicDto) {
-        const relic = await this.relicRepository.findOneByOrFail({ name: dto.name } || { id: dto.id })
+    async update(dto: UpdateRelicDto): Promise<UpdateResult> {
+        const result: UpdateResult = await this.relicRepository.update({ name: dto.name }, dto)
+        return result;
+    }
 
-        return relic
+    async delete(dto: DeleteRelicDto): Promise<DeleteResult> {
+        const { name, id } = dto;
+        const result: DeleteResult = await this.relicRepository.delete({ name } || { id })
+        return result;
     }
 }
