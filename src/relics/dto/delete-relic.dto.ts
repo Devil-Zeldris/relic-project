@@ -1,10 +1,4 @@
-import { IsNotEmpty, IsNumber, IsOptional } from "class-validator";
-import { CreateRelicDto } from "./create-relic.dto";
 import { PickType } from "@nestjs/mapped-types";
+import { RelicEntity } from "../entities/relic.entity";
 
-export class DeleteRelicDto extends PickType(CreateRelicDto, ['name'] as const) {
-    @IsNumber()
-    @IsNotEmpty()
-    @IsOptional()
-    id?: number
-}
+export class DeleteRelicDto extends PickType(RelicEntity, ['name', "id"] as const) { }

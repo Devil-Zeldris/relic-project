@@ -10,6 +10,9 @@ export class RelicEntity {
     @Column({ type: "varchar", name: "name", nullable: false })
     name: string
 
+    @Column({ type: "varchar", name: "url_name", nullable: false })
+    url_name: string
+
     @Column({ type: "enum", enum: RelicType, name: "type", nullable: false })
     type: RelicType
 
@@ -19,7 +22,7 @@ export class RelicEntity {
     @Column({ type: "boolean", name: "vaulted", nullable: false })
     vaulted: boolean
 
-    @OneToMany(type => AnnoucementEntity, annoucement => annoucement.id, { onDelete: "CASCADE" })
+    @OneToMany(type => AnnoucementEntity, annoucement => annoucement.relic, { onDelete: "CASCADE" })
     @JoinColumn({ name: "annoucement_id" })
-    annoucements: number
+    annoucements: AnnoucementEntity[]
 }

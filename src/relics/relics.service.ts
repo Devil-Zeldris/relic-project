@@ -5,6 +5,7 @@ import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { CreateRelicDto } from './dto/create-relic.dto';
 import { UpdateRelicDto } from './dto/update-relic.dto'
 import { DeleteRelicDto } from './dto/delete-relic.dto';
+import { FindRelicDto } from './dto/find-relic.dto';
 
 @Injectable()
 export class RelicsService {
@@ -12,6 +13,12 @@ export class RelicsService {
 
     async create(dto: CreateRelicDto): Promise<RelicEntity> {
         const relic: RelicEntity = await this.relicRepository.save(dto)
+        return relic;
+    }
+
+    async getOne(dto: FindRelicDto): Promise<RelicEntity | null> {
+        const { name, id } = dto;
+        const relic: RelicEntity | null = await this.relicRepository.findOneBy({ name, id })
         return relic;
     }
 
