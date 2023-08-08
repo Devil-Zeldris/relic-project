@@ -16,6 +16,5 @@ export class UserEntity {
     avatar_url: string;
 
     @ManyToOne(type => AnnoucementEntity, annoucement => annoucement.user)
-    @JoinColumn({ name: "annoucement_id" })
     annoucement: AnnoucementEntity
 }

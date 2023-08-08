@@ -2,7 +2,7 @@ import { PickType } from "@nestjs/mapped-types";
 import { RelicEntity } from "../entities/relic.entity";
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 
-export class UpdateRelicDto extends PickType(RelicEntity, ["name", "id",]) {
+export class UpdateRelicDto extends PickType(RelicEntity, ["name", "id"]) {
     @IsNumber()
     @IsNotEmpty()
     @IsOptional()
@@ -12,4 +12,6 @@ export class UpdateRelicDto extends PickType(RelicEntity, ["name", "id",]) {
     @IsNotEmpty()
     @IsOptional()
     declare name: string;
+
+
 }
