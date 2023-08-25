@@ -12,4 +12,9 @@ export class FindRelicDto extends PickType(RelicEntity, ['name', 'id'] as const)
     @IsNotEmpty()
     @IsOptional()
     declare name: string;
+
+    @IsString()
+    @IsNotEmpty()
+    @IsOptional()
+    declare url_name: string;
 }

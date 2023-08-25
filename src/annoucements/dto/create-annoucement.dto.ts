@@ -1,14 +1,21 @@
-import { ArrayMaxSize, IsArray, IsNotEmpty, IsString } from "class-validator";
+import { ArrayMaxSize, IsArray, IsNotEmpty, IsString, IsUUID } from "class-validator";
 import { AnnoucementEntity } from "../entities/annoucement.entity";
 import { OmitType } from "@nestjs/mapped-types";
+import { UserEntity } from "#src/users/entities/user.entity";
 
 export class CreateAnnoucementDto extends OmitType(AnnoucementEntity, ["id"] as const) {
     @IsNotEmpty()
     @IsString()
-    declare host_uuid: any
+    @IsUUID()
+    @IsArray()
+    declare host_uuid: string[]
 
     @IsNotEmpty()
     @IsArray()
     @ArrayMaxSize(4)
-    declare squad: any[]
+    declare squad: UserEntity[]
+
+    @IsString()
+    @IsNotEmpty()
+    declare url_name: string
 }

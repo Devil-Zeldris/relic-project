@@ -1,5 +1,5 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { AnnoucementEntity } from "../annoucements/entities/annoucement.entity";
+import { AnnoucementEntity } from "../../annoucements/entities/annoucement.entity";
 
 @Entity({ name: "squads" })
 export class SquadEntity {

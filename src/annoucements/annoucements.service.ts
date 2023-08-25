@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { AnnoucementEntity } from "./entities/annoucement.entity";
 import { Repository } from "typeorm";
@@ -17,6 +17,10 @@ export class AnnoucementsService {
     }
 
     async getOne(dto: Pick<AnnoucementEntity, "id">): Promise<AnnoucementEntity | null> {
-        return this.annoucementRepository.findOneBy({ id: dto.id })
+        const annoucement = this.annoucementRepository.findOneBy({ id: dto.id })
+
+        if (!annoucement) throw new HttpException("Annoucement not found", HttpStatus.NOT_FOUND);
+
+        return annoucement
     }
 }

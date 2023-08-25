@@ -13,5 +13,9 @@ export class UpdateRelicDto extends PickType(RelicEntity, ["name", "id"]) {
     @IsOptional()
     declare name: string;
 
+    @IsString()
+    @IsNotEmpty()
+    @IsOptional()
+    declare url_name: string;
 
 }

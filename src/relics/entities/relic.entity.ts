@@ -23,5 +23,6 @@ export class RelicEntity {
     vaulted: boolean
 
     @OneToMany(type => AnnoucementEntity, annoucement => annoucement.relic, { onDelete: "CASCADE" })
+    @JoinColumn({ name: "annoucement_id", })
     annoucements: AnnoucementEntity[]
 }

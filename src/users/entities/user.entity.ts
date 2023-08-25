@@ -15,6 +15,6 @@ export class UserEntity {
     @Column({ type: "varchar", name: "avatar_url" })
     avatar_url: string;
 
-    @ManyToOne(type => AnnoucementEntity, annoucement => annoucement.user)
+    @ManyToOne(type => AnnoucementEntity, annoucement => annoucement.host_uuid)
     annoucement: AnnoucementEntity
 }
