@@ -8,10 +8,10 @@ export class AnnoucementEntity {
     @PrimaryGeneratedColumn("increment", { name: "annoucement_id" })
     id: number;
 
-    @OneToMany(type => UserEntity, user => user.annoucement, { onUpdate: "CASCADE" })
-    host_uuid: string[];
+    @OneToOne(type => UserEntity, user => user.annoucement, { onUpdate: "CASCADE", onDelete: "CASCADE" })
+    host_uuid: string;
 
-    @ManyToOne(type => RelicEntity, relic => relic.annoucements)
+    @ManyToOne(type => RelicEntity, relic => relic.annoucements, { onDelete: "CASCADE", onUpdate: "CASCADE" })
     relic: RelicEntity;
 
     @OneToMany(type => UserEntity, user => user.annoucement, { onDelete: "CASCADE", onUpdate: "CASCADE" })

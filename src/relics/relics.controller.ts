@@ -1,9 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { CreateRelicDto } from './dto/create-relic.dto';
 import { RelicsService } from './relics.service';
-import { UpdateRelicDto } from './dto/update-relic.dto';
-import { DeleteRelicDto } from './dto/delete-relic.dto';
-import { AnnoucementEntity } from '#src/annoucements/entities/annoucement.entity';
+import { CreateRelicDto, UpdateRelicDto, DeleteRelicDto } from './dto'
+import { RelicEntity } from './entities/relic.entity';
 
 @Controller('relics')
 export class RelicsController {
@@ -20,7 +18,7 @@ export class RelicsController {
     }
 
     @Get(':url_name/annoucements')
-    async getAnnoucementsByRelic(@Param('url_name') url_name: string): Promise<AnnoucementEntity[]> {
+    async getAnnoucementsByRelic(@Param('url_name') url_name: string): Promise<RelicEntity | null> {
         return this.relicsService.getAnnoucementsByRelic(url_name);
     }
 

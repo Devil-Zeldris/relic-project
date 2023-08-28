@@ -1,11 +1,10 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RelicEntity } from './entities/relic.entity';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { CreateRelicDto } from './dto/create-relic.dto';
 import { UpdateRelicDto } from './dto/update-relic.dto'
 import { DeleteRelicDto } from './dto/delete-relic.dto';
-import { FindRelicDto } from './dto/find-relic.dto';
 
 @Injectable()
 export class RelicsService {
@@ -16,9 +15,8 @@ export class RelicsService {
         return relic;
     }
 
-    async getOne(dto: FindRelicDto): Promise<RelicEntity | null> {
-        const { name, id } = dto;
-        const relic: RelicEntity | null = await this.relicRepository.findOneBy({ name, id })
+    async getOne(url_name: string): Promise<RelicEntity | null> {
+        const relic: RelicEntity | null = await this.relicRepository.findOneBy({ url_name })
 
         if (!relic) throw new NotFoundException("Relic not found");
 
@@ -30,7 +28,7 @@ export class RelicsService {
         return relics;
     }
 
-    async getAnnoucementsByRelic(url_name: string): Promise<any> {
+    async getAnnoucementsByRelic(url_name: string): Promise<RelicEntity | null> {
         const annoucements = await this.relicRepository.findOne({ relations: { annoucements: true }, where: { url_name } });
         return annoucements;
 

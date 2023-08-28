@@ -1,26 +1,25 @@
-import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { AnnoucementEntity } from "./entities/annoucement.entity";
 import { Repository } from "typeorm";
-import { CreateAnnoucementDto } from "./dto/create-annoucement.dto";
+import { CreateAnnoucementDto } from "./dto";
+import { RelicsService } from "#src/relics/relics.service";
 
 @Injectable()
 export class AnnoucementsService {
-    constructor(@InjectRepository(AnnoucementEntity) private annoucementRepository: Repository<AnnoucementEntity>) { }
+    constructor(
+        @InjectRepository(AnnoucementEntity)
+        private annoucementRepository: Repository<AnnoucementEntity>,
+        private relicService: RelicsService) { }
 
-    async create(dto: CreateAnnoucementDto): Promise<CreateAnnoucementDto> {
-        return this.annoucementRepository.save(dto)
-    }
+    async createAnnoucement(relic_url_name: string, dto: CreateAnnoucementDto): Promise<AnnoucementEntity> {
+        const relic = await this.relicService.getOne(relic_url_name);
 
-    async getAllByRelic() {
+        if (!relic) throw new NotFoundException("Relic not found");
 
-    }
-
-    async getOne(dto: Pick<AnnoucementEntity, "id">): Promise<AnnoucementEntity | null> {
-        const annoucement = this.annoucementRepository.findOneBy({ id: dto.id })
-
-        if (!annoucement) throw new HttpException("Annoucement not found", HttpStatus.NOT_FOUND);
+        const annoucement = await this.annoucementRepository.save(dto, { data: relic.id });
 
         return annoucement
     }
+
 }
