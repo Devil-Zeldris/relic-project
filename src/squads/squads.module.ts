@@ -1,9 +1,8 @@
 import { Module } from '@nestjs/common';
-import { SquadController } from './squads.controller';
-import { SquadService } from './squads.service';
+import { SquadsController, SquadsService } from '#src/squads/index.js'
 
 @Module({
-  controllers: [SquadController],
-  providers: [SquadService]
+  controllers: [SquadsController],
+  providers: [SquadsService]
 })
 export class SquadsModule { }

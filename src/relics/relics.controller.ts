@@ -1,7 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { RelicsService } from './relics.service';
-import { CreateRelicDto, UpdateRelicDto, DeleteRelicDto } from './dto'
-import { RelicEntity } from './entities/relic.entity';
+import { RelicsService, RelicEntity, CreateRelicDto, UpdateRelicDto, DeleteRelicDto } from './index.js';
 
 @Controller('relics')
 export class RelicsController {

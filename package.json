@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "relic-project",
   "version": "0.0.1",
   "description": "",

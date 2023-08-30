@@ -1,6 +1,6 @@
 import { IsArray, IsNotEmpty, IsUUID, Length } from "class-validator";
 
-export class SquadDto {
+export class CreateSquadDto {
     @IsNotEmpty()
     @IsUUID()
     public readonly host_id: string

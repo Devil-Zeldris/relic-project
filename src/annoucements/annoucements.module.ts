@@ -1,12 +1,11 @@
-import { AnnoucementEntity } from "#src/annoucements/entities/annoucement.entity";
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { AnnoucementsController } from "./annoucements.controller";
-import { AnnoucementsService } from "./annoucements.service";
+import { AnnoucementsController, AnnoucementsService, AnnoucementEntity } from "#src/annoucements/index.js";
+import { RelicsService } from '#src/relics/index.js'
 
 @Module({
     imports: [TypeOrmModule.forFeature([AnnoucementEntity])],
     controllers: [AnnoucementsController],
-    providers: [AnnoucementsService]
+    providers: [AnnoucementsService, RelicsService]
 })
 export class AnnoucementsModule { }

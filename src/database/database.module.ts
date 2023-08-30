@@ -3,7 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 enum DatabaseType {
-Postgres = 'postgres'
+    Postgres = 'postgres'
 }
 
 @Module({
@@ -13,11 +13,11 @@ Postgres = 'postgres'
             inject: [ConfigService],
             useFactory: (config: ConfigService) => ({
                 type: DatabaseType.Postgres,
-                host: config.get<string>('POSTGRES_HOST'),
-                port: config.get<number>('POSTGRES_PORT'),
-                username: config.get<string>('POSTGRES_USERNAME'),
-                password: config.get<string>('POSTGRES_PASSWORD'),
-                database: config.get<string>('POSTGRES_DB'),
+                host: config.getOrThrow<string>('POSTGRES_HOST'),
+                port: config.getOrThrow<number>('POSTGRES_PORT'),
+                username: config.getOrThrow<string>('POSTGRES_USERNAME'),
+                password: config.getOrThrow<string>('POSTGRES_PASSWORD'),
+                database: config.getOrThrow<string>('POSTGRES_DB'),
                 autoLoadEntities: true,
                 synchronize: true,
             })

@@ -1,22 +1,19 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { RelicEntity } from './entities/relic.entity';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
-import { CreateRelicDto } from './dto/create-relic.dto';
-import { UpdateRelicDto } from './dto/update-relic.dto'
-import { DeleteRelicDto } from './dto/delete-relic.dto';
+import { CreateRelicDto, UpdateRelicDto, DeleteRelicDto, RelicEntity } from './index.js'
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class RelicsService {
-    constructor(@InjectRepository(RelicEntity) private relicRepository: Repository<RelicEntity>) { }
+    constructor(@InjectRepository(RelicEntity) private relicsRepo: Repository<RelicEntity>) { }
 
     async create(dto: CreateRelicDto): Promise<RelicEntity> {
-        const relic: RelicEntity = await this.relicRepository.save(dto)
+        const relic: RelicEntity = await this.relicsRepo.save(dto)
         return relic;
     }
 
-    async getOne(url_name: string): Promise<RelicEntity | null> {
-        const relic: RelicEntity | null = await this.relicRepository.findOneBy({ url_name })
+    async getRelicByUrlName(url_name: string): Promise<RelicEntity> {
+        const relic = await this.relicsRepo.findOne({ where: { url_name } })
 
         if (!relic) throw new NotFoundException("Relic not found");
 
@@ -24,24 +21,24 @@ export class RelicsService {
     }
 
     async getAll(): Promise<RelicEntity[]> {
-        const relics: RelicEntity[] = await this.relicRepository.find()
+        const relics: RelicEntity[] = await this.relicsRepo.find()
         return relics;
     }
 
     async getAnnoucementsByRelic(url_name: string): Promise<RelicEntity | null> {
-        const annoucements = await this.relicRepository.findOne({ relations: { annoucements: true }, where: { url_name } });
+        const annoucements = await this.relicsRepo.findOne({ relations: { annoucements: true }, where: { url_name } });
         return annoucements;
 
     }
 
     async update(dto: UpdateRelicDto): Promise<UpdateResult> {
-        const result: UpdateResult = await this.relicRepository.update({ name: dto.name }, dto)
+        const result: UpdateResult = await this.relicsRepo.update({ name: dto.name }, dto)
         return result;
     }
 
     async delete(dto: DeleteRelicDto): Promise<DeleteResult> {
-        const { name, id, url_name } = dto;
-        const result: DeleteResult = await this.relicRepository.delete({ name } || { id } || { url_name })
+        const { url_name } = dto;
+        const result: DeleteResult = await this.relicsRepo.delete({ url_name })
         return result;
     }
 }
