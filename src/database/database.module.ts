@@ -20,6 +20,7 @@ enum DatabaseType {
                 database: config.getOrThrow<string>('POSTGRES_DB'),
                 autoLoadEntities: true,
                 synchronize: true,
+                logging: true
             })
         })
     ]

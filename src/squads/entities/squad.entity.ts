@@ -1,5 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { AnnoucementEntity } from "#src/annoucements/index.js";
+import { Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: "squads" })
 export class SquadEntity {

@@ -5,10 +5,3 @@ export enum RelicType {
     Axi = "axi",
     Requiem = "requiem",
 }
-
-export enum RelicRefinementType {
-    Intact = "intact",
-    Exceptional = "exceptional",
-    Flawless = "flawless",
-    Radiant = "radiant"
-}

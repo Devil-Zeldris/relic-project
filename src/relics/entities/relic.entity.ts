@@ -1,5 +1,5 @@
-import { AnnoucementEntity } from "#src/annoucements/index.js";
-import { RelicRefinementType, RelicType } from "#src/relics/index.js";
+import { AnnoucementEntity } from "src/annoucements/index.js";
+import { RelicRefinementType, RelicType } from "src/relics/index.js";
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 
 @Entity({ name: "relics" })
@@ -13,7 +13,7 @@ export class RelicEntity {
     @Column({ type: "varchar", name: "url_name", nullable: false })
     url_name: string
 
-    @Column({ type: "enum", enum: RelicType, name: "type", nullable: false, })
+    @Column({ type: "enum", enum: RelicType, name: "type", nullable: false })
     type: RelicType
 
     @Column({ type: "enum", enum: RelicRefinementType, name: "refinement", nullable: false, default: RelicRefinementType.Intact })

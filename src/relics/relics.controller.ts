@@ -1,11 +1,11 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { RelicsService, RelicEntity, CreateRelicDto, UpdateRelicDto, DeleteRelicDto } from './index.js';
+import { RelicsService, RelicEntity, CreateRelicDto, UpdateRelicDto, DeleteRelicDto } from '../relics/index.js';
 
 @Controller('relics')
 export class RelicsController {
     constructor(private relicsService: RelicsService) { };
 
-    @Post('create')
+    @Post()
     async create(@Body() relicDto: CreateRelicDto) {
         return this.relicsService.create(relicDto);
     }
