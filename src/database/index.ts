@@ -1,0 +1,1 @@
+export { DatabaseModule } from "@src/database/database.module.js"

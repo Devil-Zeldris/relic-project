@@ -1,6 +1,6 @@
-import { IsString, MaxLength, IsNotEmpty, IsEnum, IsBoolean } from "class-validator";
-import { RelicEntity, RelicRefinementType, RelicType } from "src/relics/index.js";
 import { OmitType } from "@nestjs/mapped-types";
+import { IsBoolean, IsEnum, IsNotEmpty, IsString, MaxLength } from "class-validator";
+import { RelicEntity, RelicRefinementType, RelicType } from "@relics";
 
 export class CreateRelicDto extends OmitType(RelicEntity, ["annoucements", "id", "url_name"] as const) {
     @IsString()
