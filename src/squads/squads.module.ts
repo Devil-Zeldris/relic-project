@@ -1,5 +1,5 @@
-import { Module } from '@nestjs/common';
-import { SquadsController, SquadsService } from '../squads/index.js'
+import { SquadsController, SquadsService } from "@src/squads/index.js";
+import { Module } from "@nestjs/common";
 
 @Module({
   controllers: [SquadsController],

@@ -1,6 +1,6 @@
-import { AnnoucementEntity } from "src/annoucements/index.js";
-import { RelicRefinementType, RelicType } from "src/relics/index.js";
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn, type Relation } from "typeorm";
+import { RelicRefinementType, RelicType } from "@relics";
+import { AnnouncementEntity } from "@announcements";
 
 @Entity({ name: "relics" })
 export class RelicEntity {
@@ -22,6 +22,7 @@ export class RelicEntity {
     @Column({ type: "boolean", name: "vaulted", nullable: false, default: false })
     vaulted: boolean
 
-    @OneToMany(type => AnnoucementEntity, (annoucement: AnnoucementEntity) => annoucement, { onDelete: "CASCADE", onUpdate: "CASCADE" })
-    annoucements: AnnoucementEntity[]
+    @OneToMany(type => AnnouncementEntity, (announcement: AnnouncementEntity) => announcement.id, { onDelete: "CASCADE", onUpdate: "CASCADE" })
+    @JoinColumn({ name: "announcement_id" })
+    annoucements: Relation<AnnouncementEntity[]>
 }

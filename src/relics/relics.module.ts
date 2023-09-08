@@ -1,6 +1,6 @@
-import { Module } from '@nestjs/common';
-import { RelicsController, RelicsService, RelicEntity } from '../relics/index.js'
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { Module } from "@nestjs/common";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { RelicsService, RelicEntity, RelicsController } from "@relics";
 
 @Module({
   controllers: [RelicsController],

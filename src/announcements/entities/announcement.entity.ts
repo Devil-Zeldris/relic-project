@@ -1,16 +1,16 @@
-
-import { RelicEntity } from "src/relics/index.js";
 import {
     CreateDateColumn,
     Entity,
+    JoinColumn,
     ManyToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
-    JoinColumn
+    type Relation,
 } from "typeorm";
+import { RelicEntity } from "@relics";
 
-@Entity({ name: "annoucements" })
-export class AnnoucementEntity {
+@Entity({ name: "announcements" })
+export class AnnouncementEntity {
     @PrimaryGeneratedColumn("increment", { name: "annoucement_id" })
     id: number;
 
@@ -20,7 +20,7 @@ export class AnnoucementEntity {
 
     @ManyToOne(type => RelicEntity, relic => relic.id, { onDelete: "CASCADE", onUpdate: "CASCADE" })
     @JoinColumn({ name: 'relic_id' })
-    relic: RelicEntity;
+    relic: Relation<RelicEntity>;
 
     // @OneToMany(type => UserEntity, user => user, { onDelete: "CASCADE", onUpdate: "CASCADE" })
     // squad: UserEntity[];

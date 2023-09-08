@@ -1,6 +1,6 @@
 import { PickType } from "@nestjs/mapped-types";
-import { UserEntity } from "../../users/index.js";
 import { IsNotEmpty, IsOptional, IsString, IsUUID } from "class-validator";
+import { UserEntity } from "@users";
 
 export class FindUserDto extends PickType(UserEntity, ["user_id", "username"] as const) {
     @IsUUID()

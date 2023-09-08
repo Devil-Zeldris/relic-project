@@ -1,7 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { DeleteResult, Repository, UpdateResult } from 'typeorm';
-import { InjectRepository } from '@nestjs/typeorm';
-import { CreateRelicDto, UpdateRelicDto, DeleteRelicDto, RelicEntity } from '../relics/index.js'
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { type Repository, DeleteResult, UpdateResult } from "typeorm";
+import { type CreateRelicDto, type DeleteRelicDto, type UpdateRelicDto, RelicEntity, RelicRefinementType } from "@relics";
+import { AnnouncementEntity } from "@announcements";
+
 
 @Injectable()
 export class RelicsService {
@@ -25,10 +27,12 @@ export class RelicsService {
         return relics;
     }
 
-    async getAnnoucementsByRelic(url_name: string): Promise<RelicEntity | null> {
-        const annoucements = await this.relicsRepo.findOne({ relations: { annoucements: true }, where: { url_name } });
-        return annoucements;
+    async getAnnouncementsByRelic(url_name: string, type: RelicRefinementType): Promise<AnnouncementEntity[]> {
+        const relic = await this.relicsRepo.findOne({ where: { url_name, refinement: type }, relations: { annoucements: true } });
 
+        if (!relic) throw new NotFoundException('Relic not found');
+
+        return relic.annoucements
     }
 
     async update(dto: UpdateRelicDto): Promise<UpdateResult> {

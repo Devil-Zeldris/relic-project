@@ -1,6 +1,6 @@
 import { PickType } from "@nestjs/mapped-types";
 import { IsNotEmpty, MaxLength, IsString, IsUrl } from "class-validator";
-import { UserEntity } from "../../users/index.js";
+import { UserEntity } from "@users";
 
 export class CreateUserDto extends PickType(UserEntity, ["username", "avatar_url"]) {
     @IsNotEmpty()

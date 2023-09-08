@@ -1,5 +1,5 @@
-import { AnnoucementEntity } from "../../annoucements/index.js";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { AnnoucementEntity } from "@announcements";
 
 @Entity({ name: "users" })
 export class UserEntity {
