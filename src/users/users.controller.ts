@@ -1,10 +1,5 @@
-import { Controller, Post, Get, Body, Put } from '@nestjs/common';
-import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { FindUserDto } from './dto/find-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { UserEntity } from './entities/user.entity';
-import { UpdateResult } from 'typeorm';
+import { Controller, Post, Get, Body } from '@nestjs/common';
+import { UsersService, UserEntity, CreateUserDto, FindUserDto } from '../users/index.js';
 
 @Controller('users')
 export class UsersController {
@@ -20,8 +15,8 @@ export class UsersController {
         return this.usersService.getOne(id)
     }
 
-    @Put(':id/update')
-    async update(@Body() id: UpdateUserDto): Promise<UpdateResult> {
-        return this.usersService.update(id)
-    }
+    // @Put(':id/update')
+    // async update(@Body() id: UpdateUserDto): Promise<UpdateResult> {
+    //     return this.usersService.update(id)
+    // }
 }

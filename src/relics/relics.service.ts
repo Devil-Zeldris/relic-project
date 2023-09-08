@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
-import { CreateRelicDto, UpdateRelicDto, DeleteRelicDto, RelicEntity } from './index.js'
 import { InjectRepository } from '@nestjs/typeorm';
+import { CreateRelicDto, UpdateRelicDto, DeleteRelicDto, RelicEntity } from '../relics/index.js'
 
 @Injectable()
 export class RelicsService {

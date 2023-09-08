@@ -1,6 +1,6 @@
 import { NestFactory } from "@nestjs/core";
-import { RelicProjectApp } from "#src/RelicProject.module.js";
 import { ValidationPipe } from "@nestjs/common"
+import { RelicProjectApp } from "./RelicProject.module.js";
 
 async function bootstrap() {
   const app = await NestFactory.create(RelicProjectApp);

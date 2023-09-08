@@ -1,11 +1,10 @@
 import { Module } from "@nestjs/common";
-import { DataSource } from "typeorm";
-import { SquadsModule } from './squads/squads.module';
-import { UsersModule } from './users/users.module';
-import { AnnoucementsModule } from "./annoucements/annoucements.module";
-import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from "@nestjs/config";
-import { RelicsModule } from "./relics/relics.module";
+import { SquadsModule } from './squads/index.js';
+import { UsersModule } from './users/index.js';
+import { AnnoucementsModule } from "./annoucements/index.js";
+import { DatabaseModule } from './database/database.module.js';
+import { RelicsModule } from "./relics/index.js";
 
 @Module({
   imports: [
@@ -19,6 +18,4 @@ import { RelicsModule } from "./relics/relics.module";
   ],
   providers: [],
 })
-export class RelicProjectApp {
-  constructor(private dataSource: DataSource) { }
-}
+export class RelicProjectApp { }

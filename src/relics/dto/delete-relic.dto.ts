@@ -1,5 +1,5 @@
 import { PickType } from "@nestjs/mapped-types";
-import { RelicEntity } from "../entities/relic.entity";
+import { RelicEntity } from "src/relics/index.js";
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 
 export class DeleteRelicDto extends PickType(RelicEntity, ['name', "id", "url_name"] as const) {
